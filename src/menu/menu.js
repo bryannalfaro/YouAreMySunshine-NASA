@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import Store from '../navigation/store'
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import {
   StyleSheet,
   Animated,
@@ -88,10 +88,6 @@ const Menu = () => {
     }).start();
     setIsOpen(false);
   };
-
-  useEffect(() => {
-    //console.log(context.store)
-  }, [])
 
   return context.store.lat === null ? null : (
     <Animated.View
