@@ -58,9 +58,8 @@ const Location = () => {
   const { dispatch } = useContext(Store)
   const countriesData = countries.countries
   const flags = countries.flags
-
-  var lat = 0
-  var lon = 0
+  const [lat, setLat] = useState(0)
+  const [lon, setLon] = useState(0)
 
   const prepareResources = async () => {
     const active = await Locationd.hasServicesEnabledAsync()
@@ -79,8 +78,8 @@ const Location = () => {
     await Locationd.getCurrentPositionAsync({}).then((location) => {
       setLocation(location)
       setIsReady(true)
-      lat = location.coords.latitude
-      lon = location.coords.longitude
+      setLat(location.coords.latitude)
+      setLon(location.coords.longitude)
       fetch(
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`
       )

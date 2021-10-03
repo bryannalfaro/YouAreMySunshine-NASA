@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -8,9 +8,11 @@ import {
   ScrollView,
   Dimensions
 } from "react-native";
+import Store from '../navigation/store';
 import Splash from "../splash/splash";
 import { Searchbar } from "react-native-paper";
 import { useNavigation } from "@react-navigation/core";
+import { fetchData } from "../services/nasaPower";
 
 const { width, height } = Dimensions.get("window");
 
@@ -68,10 +70,19 @@ const styles = StyleSheet.create({
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = React.useState("");
+  const [solarData, setSolarData] = useState([]);
   const onChangeSearch = (query) => setSearchQuery(query);
   const navigation = useNavigation();
+  const context = useContext(Store);
+
+  const getSolar = async () => {
+    setSolarData(await fetchData('Luz Solar'));
+    console.log(solarData);
+  }
 
   useEffect(() => {
+    console.log(context)
+    getSolar();
     setTimeout(() => {
       setIsLoading(false);
     }, 1);
