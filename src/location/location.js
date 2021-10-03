@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
 })
 
 const Location = () => {
-  const [flagg, setFlag] = useState("AF")
-  const [selectedLanguage, setSelectedLanguage] = useState("Afghanistan")
+  const [flagg, setFlag] = useState("GT")
+  const [selectedLanguage, setSelectedLanguage] = useState("Guatemala")
   const [location, setLocation] = useState(null)
   const [errorMsg, setErrorMsg] = useState(null)
   const [isReady, setIsReady] = useState(false)
