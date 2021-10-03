@@ -1,6 +1,14 @@
 import { useNavigation } from "@react-navigation/core";
-import React from "react";
-import { StyleSheet, Animated, View, Text, Pressable, Image } from "react-native";
+import Store from '../navigation/store'
+import React, { useContext, useEffect } from "react";
+import {
+  StyleSheet,
+  Animated,
+  View,
+  Text,
+  Pressable,
+  Image,
+} from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -60,7 +68,8 @@ const styles = StyleSheet.create({
 const Menu = () => {
   const [animation] = React.useState(new Animated.Value(0));
   const [isOpen, setIsOpen] = React.useState(false);
-  const navigation = useNavigation()
+  const context = useContext(Store)
+  const navigation = useNavigation();
 
   const openAnimation = () => {
     Animated.timing(animation, {
@@ -80,7 +89,11 @@ const Menu = () => {
     setIsOpen(false);
   };
 
-  return (
+  useEffect(() => {
+    //console.log(context.store)
+  }, [])
+
+  return context.store.lat === null ? null : (
     <Animated.View
       style={[
         styles.container,
@@ -97,30 +110,50 @@ const Menu = () => {
       ]}
     >
       <Animated.View
-        style={[styles.optionsContainer,
-        {
-          transform: [
-            {
-              translateY: animation.interpolate({
-                inputRange: [0, 1],
-                outputRange: [0, -75],
-              }),
-            },
-          ],
-        }]}
+        style={[
+          styles.optionsContainer,
+          {
+            transform: [
+              {
+                translateY: animation.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0, -75],
+                }),
+              },
+            ],
+          },
+        ]}
       >
-        <Pressable style={styles.option} onPress={() => navigation.navigate('Location')}>
-          <Image style={styles.optionImage} source={require('../../assets/icons/location.png')} />
+        <Pressable
+          style={styles.option}
+          onPress={() => navigation.navigate("Location")}
+        >
+          <Image
+            style={styles.optionImage}
+            source={require("../../assets/icons/location.png")}
+          />
           <Text>Location</Text>
         </Pressable>
 
-        <Pressable style={styles.option} onPress={() => navigation.navigate('Home')}>
-          <Image style={styles.optionImage} source={require('../../assets/icons/home.png')} />
+        <Pressable
+          style={styles.option}
+          onPress={() => navigation.navigate("Home")}
+        >
+          <Image
+            style={styles.optionImage}
+            source={require("../../assets/icons/home.png")}
+          />
           <Text>Home</Text>
         </Pressable>
 
-        <Pressable style={styles.option} onPress={() => navigation.navigate('About')}>
-          <Image style={styles.optionImage} source={require('../../assets/icons/about.png')} />
+        <Pressable
+          style={styles.option}
+          onPress={() => navigation.navigate("About")}
+        >
+          <Image
+            style={styles.optionImage}
+            source={require("../../assets/icons/about.png")}
+          />
           <Text>About us</Text>
         </Pressable>
       </Animated.View>
@@ -146,8 +179,13 @@ const Menu = () => {
           }}
         >
           <Image
-            style={{ flex: 1, width: '100%', height: '100%', resizeMode: "contain" }}
-            source={require('../../assets/icons/menu.png')}
+            style={{
+              flex: 1,
+              width: "100%",
+              height: "100%",
+              resizeMode: "contain",
+            }}
+            source={require("../../assets/icons/menu.png")}
           />
           <Text>Menu</Text>
         </Pressable>

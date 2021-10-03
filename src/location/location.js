@@ -1,20 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { StyleSheet, View, ScrollView, Text, Button } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import Flag from 'react-native-flags'
 import * as Locationd from 'expo-location'
 import { useNavigation } from '@react-navigation/native'
+import Store from '../navigation/store'
 import countries from './countries.json'
 import Splash from '../splash/splash'
 
 const styles = StyleSheet.create({
   scontainer: {
     flex: 1,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center"
   },
   container: {
-    flex: 1,
+    flex: 3,
     justifyContent: "center",
-    backgroundColor: "white",
+    width: "80%",
   },
 
   data: {
@@ -22,11 +26,19 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     marginBottom: 40,
   },
-
-  button: {
-    height: 200,
-    alignItems: "center",
+  picker: {
+    width: "100%",
+    height: 50,
+    borderColor: "#c7c7c7",
+    borderWidth: 1,
+    borderRadius: 10,
     justifyContent: "center",
+  },
+  button: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    backgroundColor: "white",
   },
   text1: {
     fontSize: 35,
@@ -43,6 +55,7 @@ const Location = () => {
   const [errorMsg, setErrorMsg] = useState(null)
   const [isReady, setIsReady] = useState(false)
   const navigation = useNavigation()
+  const { dispatch } = useContext(Store)
   const countriesData = countries.countries
   const flags = countries.flags
 
@@ -104,17 +117,22 @@ const Location = () => {
           <Flag code={flagg} size={64} />
           <Text style={styles.text2}>{selectedLanguage}</Text>
         </View>
-        <Picker
-          selectedValue={selectedLanguage}
-          onValueChange={(itemValue) => change(itemValue)}
-        >
-          {countriesData.map((item, index) => {
-            return <Picker.Item value={item} label={item} key={index} />
-          })}
-        </Picker>
+        <View style={styles.picker}>
+          <Picker
+            selectedValue={selectedLanguage}
+            onValueChange={(itemValue) => change(itemValue)}
+          >
+            {countriesData.map((item, index) => {
+              return <Picker.Item value={item} label={item} key={index} />
+            })}
+          </Picker>
+        </View>
       </View>
       <View style={styles.button}>
-        <Button onPress={() => { navigation.navigate('Home') }} title="CONTINUAR" />
+        <Button onPress={() => {
+          dispatch({ type: 'LOCATED', lat: lat, lon: lon })
+          navigation.navigate('Home')
+        }} title="CONTINUAR" />
       </View>
     </ScrollView>
   ) : (
