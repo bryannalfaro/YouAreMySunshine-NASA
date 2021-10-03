@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Splash from "../splash/splash";
 import { Searchbar } from "react-native-paper";
+import { useNavigation } from "@react-navigation/core";
 
 const { width, height } = Dimensions.get("window");
 
@@ -68,6 +69,7 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = React.useState("");
   const onChangeSearch = (query) => setSearchQuery(query);
+  const navigation = useNavigation();
 
   useEffect(() => {
     setTimeout(() => {
@@ -96,7 +98,9 @@ const Home = () => {
         </View>
 
         <View style={styles.containerOptions}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Specifications")}
+          >
             <View style={styles.option}>
               <Image
                 style={styles.inside}
@@ -106,7 +110,9 @@ const Home = () => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Specifications")}
+          >
             <View style={styles.option}>
               <Image
                 style={styles.inside}
@@ -115,7 +121,9 @@ const Home = () => {
               <Text>CONDICION 2 </Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Specifications")}
+          >
             <View style={styles.option}>
               <Image
                 style={styles.inside}
