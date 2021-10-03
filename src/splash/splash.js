@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View, Animated, Dimensions } from 'react-native'
+import { StyleSheet, View, Animated, Dimensions, Image } from 'react-native'
 const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
@@ -50,6 +50,7 @@ const Splash = () => {
         style={{
           width: '100%',
           height: width,
+          top: -15,
           transform: [{
             rotate: rotation.interpolate({
               inputRange: [0, 1],
@@ -62,8 +63,9 @@ const Splash = () => {
             })
           }]
         }}
-        source={require('../../assets/splash.png')}
+        source={require('../../assets/splash-logo.png')}
       />
+      <Image style={{ width: '60%', height: 40, top: -40, resizeMode: 'contain' }} source={require('../../assets/splash-iso.png')} />
     </View>
   )
 }
