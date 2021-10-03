@@ -70,22 +70,33 @@ const styles = StyleSheet.create({
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = React.useState("");
-  const [solarData, setSolarData] = useState([]);
+  const [data, setData] = useState({
+    panel: '',
+    solar: '',
+    precipitation: '',
+    temperature: '',
+  });
   const onChangeSearch = (query) => setSearchQuery(query);
   const navigation = useNavigation();
   const context = useContext(Store);
 
   const getSolar = async () => {
-    setSolarData(await fetchData('Luz Solar'));
-    console.log(solarData);
+    const response = await fetchData('Luz Solar')
+    const last = Math.max.apply(null, Object.keys(response.properties.parameter.ALLSKY_SFC_UVA))
+    console.log(response.properties.parameter.ALLSKY_SFC_UVA[last])
+    setData((prev) => {
+      return { ...prev, solar: response.properties.parameter.ALLSKY_SFC_UVA[last]}
+    })
+  }
+
+  const getAllData = async () => {
+    await getSolar();
+    setIsLoading(false);
   }
 
   useEffect(() => {
     console.log(context)
-    getSolar();
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1);
+    getAllData();
   }, []);
 
   return isLoading ? (
@@ -105,7 +116,7 @@ const Home = () => {
             style={styles.inside}
             source={require("../../assets/panel/panel1.png")}
           ></Image>
-          <Text style={styles.text}>CONDICION</Text>
+          <Text style={styles.text}>Cond1</Text>
         </View>
 
         <View style={styles.containerOptions}>
@@ -117,7 +128,7 @@ const Home = () => {
                 style={styles.inside}
                 source={require("../../assets/sun/sun1.png")}
               ></Image>
-              <Text>CONDICION 1</Text>
+              <Text>{ data.solar }</Text>
             </View>
           </TouchableOpacity>
 
