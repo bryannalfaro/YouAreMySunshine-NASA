@@ -54,11 +54,13 @@ const Location = () => {
     if (!active) {
       setErrorMsg("Please enable location services")
       setIsReady(true)
+      return
     }
     let { status } = await Locationd.requestForegroundPermissionsAsync()
     if (status !== "granted") {
       setErrorMsg("Permission to access location was denied")
       setIsReady(true)
+      return
     }
 
     await Locationd.getCurrentPositionAsync({}).then((location) => {
