@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native'
 import Store from '../navigation/store'
 import countries from './countries.json'
 import Splash from '../splash/splash'
+import latLong from './countriesLat.json'
 
 const styles = StyleSheet.create({
   scontainer: {
@@ -81,7 +82,7 @@ const Location = () => {
       setLat(location.coords.latitude)
       setLon(location.coords.longitude)
       fetch(
-        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`
+        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${location.coords.latitude}&lon=${location.coords.longitude}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -94,7 +95,14 @@ const Location = () => {
   }
 
   useEffect(() => {
+    console.log('here')
+    console.log(flags[countriesData.indexOf(selectedLanguage)])
     setFlag(flags[countriesData.indexOf(selectedLanguage)])
+    let cod = latLong.data.find((country)=>{
+      return country.country_code === flags[countriesData.indexOf(selectedLanguage)]
+    })
+    setLat(cod.latlng[0])
+    setLon(cod.latlng[1])
   }, [selectedLanguage])
 
   useEffect(() => {
@@ -105,9 +113,9 @@ const Location = () => {
     setSelectedLanguage(itemValue)
     setFlag(flags[countriesData.indexOf(itemValue)])
   }
-  
+
   return (isReady ? (
-    
+
     <ScrollView contentContainerStyle={styles.scontainer}>
       <View style={styles.container}>
         <View style={styles.data}>
