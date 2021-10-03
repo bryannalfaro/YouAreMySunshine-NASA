@@ -41,6 +41,31 @@ const styles = StyleSheet.create({
 const Location = () => {
   const [flagg, setFlag] = useState("AF");
   const [selectedLanguage, setSelectedLanguage] = useState("Afghanistan");
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+      fetch('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=-34.44076&lon=-58.70521').then((response) => {
+          console.log(response);
+      })
+    })();
+  }, []);
+
+  let text = 'Waiting..';
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
 
  let countriefs = [
   "Afghanistan",
@@ -550,6 +575,7 @@ function change(itemValue){
             size={64}
           />
           <Text style={styles.text2}>{selectedLanguage}</Text>
+          <Text>FROM GPS:{text}</Text>
         </View>
         <Picker
           selectedValue={selectedLanguage}
