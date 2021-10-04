@@ -1,14 +1,14 @@
 {
 	"Luz Solar": {
-		"url": "https://power.larc.nasa.gov/api/temporal/hourly/point?Time=LST&parameters=ALLSKY_SFC_SW_DWN,CLRSKY_SFC_SW_DWN,ALLSKY_KT,ALLSKY_SRF_ALB,SZA,ALLSKY_SFC_PAR_TOT,CLRSKY_SFC_PAR_TOT,ALLSKY_SFC_UVA,ALLSKY_SFC_UVB,ALLSKY_SFC_UV_INDEX&community=RE&longitude=-90.5370&latitude=14.6223&start=20210101&end=20210331&format=JSON"
+		"url": "https://power.larc.nasa.gov/api/temporal/hourly/point?Time=LST&parameters=ALLSKY_SFC_SW_DWN,CLRSKY_SFC_SW_DWN,ALLSKY_KT,ALLSKY_SRF_ALB,SZA,ALLSKY_SFC_PAR_TOT,CLRSKY_SFC_PAR_TOT,ALLSKY_SFC_UVA,ALLSKY_SFC_UVB,ALLSKY_SFC_UV_INDEX&community=RE&longitude={lon}&latitude={lat}&start=20210101&end=20210331&format=JSON"
 	},
 	"Temperatura": {
-		"url": "https://power.larc.nasa.gov/api/temporal/hourly/point?Time=LST&parameters=T2M,T2MDEW,T2MWET&community=RE&longitude=-90.5370&latitude=14.6223&start=20210101&end=20210331&format=JSON"
+		"url": "https://power.larc.nasa.gov/api/temporal/hourly/point?Time=LST&parameters=T2M,T2MDEW,T2MWET&community=RE&longitude={lon}&latitude={lat}&start=20210101&end=20210331&format=JSON"
 	},
 	"Humedad": {
-		"url": "https://power.larc.nasa.gov/api/temporal/hourly/point?Time=LST&parameters=QV2M,RH2M,PRECTOTCORR&community=RE&longitude=-90.5370&latitude=14.6223&start=20210101&end=20210331&format=JSON"
+		"url": "https://power.larc.nasa.gov/api/temporal/hourly/point?Time=LST&parameters=QV2M,RH2M,PRECTOTCORR&community=RE&longitude={lon}&latitude={lat}&start=20210101&end=20210331&format=JSON"
 	},
 	"Viento": {
-		"url": "https://power.larc.nasa.gov/api/temporal/hourly/point?Time=LST&parameters=PS,WS10M,WD10M,WS50M,WD50M&community=RE&longitude=-90.5370&latitude=14.6223&start=20210101&end=20210331&format=JSON"
+		"url": "https://power.larc.nasa.gov/api/temporal/hourly/point?Time=LST&parameters=PS,WS10M,WD10M,WS50M,WD50M&community=RE&longitude={lon}&latitude={lat}&start=20210101&end=20210331&format=JSON"
 	}
 }
