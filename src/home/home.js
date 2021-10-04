@@ -220,7 +220,7 @@ const Home = () => {
                   source={require("../../assets/sun/sun1.png")}
                 ></Image>
               )}
-              <Text>{data.solar}</Text>
+              <Text>{data.solar} de Irradiancia UVA</Text>
             </View>
           </TouchableOpacity>
 
@@ -244,7 +244,7 @@ const Home = () => {
                   source={require("../../assets/cloud/cloud3.png")}
                 ></Image>
               )}
-              <Text>{data.precipitation}</Text>
+              <Text>{data.precipitation} de Precipitación</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -267,7 +267,7 @@ const Home = () => {
                   source={require("../../assets/temp/temp1.jpg")}
                 ></Image>
               )}
-              <Text>{data.temperature}</Text>
+              <Text>{data.temperature} °C</Text>
             </View>
           </TouchableOpacity>
         </View>
