@@ -105,10 +105,10 @@ const Home = () => {
     setData((prev) => {
       return {
         ...prev,
-        precipitation: response.properties.parameter.PRECTOTCORR[last],
+        precipitation: response.properties.parameter.PRECTOTCORR[last - 11],
       };
     });
-    return response.properties.parameter.PRECTOTCORR[last];
+    return response.properties.parameter.PRECTOTCORR[last - 11];
   };
 
   const getTemperature = async (lat, lon) => {
@@ -118,9 +118,9 @@ const Home = () => {
       Object.keys(response.properties.parameter.T2M)
     );
     setData((prev) => {
-      return { ...prev, temperature: response.properties.parameter.T2M[last] };
+      return { ...prev, temperature: response.properties.parameter.T2M[last - 11] };
     });
-    return response.properties.parameter.T2M[last];
+    return response.properties.parameter.T2M[last - 11];
   };
 
   const getAllData = async (lat, lon, isMounted) => {
